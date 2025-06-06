@@ -86,5 +86,22 @@ public class HomePageTest {
         driver.close();
     }
 
+    @Test
+    public void logout(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='oxd-userdropdown']")));
+
+        homePage.getUserDropDown().click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class,'oxd-dropdown-menu')]")));
+
+        List<WebElement> options = driver.findElements(By.xpath("//ul[contains(@class,'oxd-dropdown-menu')]/li"));
+        options.get(3).click();
+
+        wait.until(ExpectedConditions.urlMatches("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"));
+
+        Assert.assertTrue(driver.getCurrentUrl().matches("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"));
+
+    }
+
 
 }
